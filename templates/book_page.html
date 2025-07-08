@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} by {{ book.author }}</title>
+    <meta name="description" content="{{ book.description[:160] if book.description else 'Download ' + book.title + ' by ' + book.author + ' for free' }}">
+    <meta name="keywords" content="{{ book.title }}, {{ book.author }}, {{ book.genre|join(', ') if book.genre else 'ebook, pdf, download' }}">
+    
+    <!-- Open Graph tags for social media -->
+    <meta property="og:title" content="{{ book.title }} by {{ book.author }}">
+    <meta property="og:description" content="{{ book.description[:160] if book.description else 'Download ' + book.title + ' for free' }}">
+    <meta property="og:image" content="{{ book.cover_url or '/static/default-book-cover.jpg' }}">
+    <meta property="og:type" content="book">
+    <meta property="book:author" content="{{ book.author }}">
+    <meta property="book:isbn" content="{{ book.isbn }}">
+    <meta property="book:release_date" content="{{ book.year }}">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "{{ book.title }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ book.author }}"
+        },
+        "publisher": "{{ book.publisher }}",
+        "isbn": "{{ book.isbn }}",
+        "datePublished": "{{ book.year }}",
+        "description": "{{ book.description }}",
+        "image": "{{ book.cover_url }}",
+        "inLanguage": "{{ book.language }}",
+        "numberOfPages": {{ book.pages or 0 }},
+        "bookFormat": "{{ book.file_format }}",
+        "genre": {{ book.genre|tojson if book.genre else '[]' }}
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .book-header {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .book-cover {
+            text-align: center;
+        }
+        
+        .book-cover img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .book-info h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .book-info .author {
+            color: #7f8c8d;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .book-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .meta-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .meta-value {
+            color: #7f8c8d;
+        }
+        
+        .description {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .description h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .description p {
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .download-section {
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .affiliate-links {
+            padding: 30px 40px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .affiliate-links h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .affiliate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .affiliate-item {
+            display: block;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .affiliate-item:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tags {
+            margin-top: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            text-decoration: none;
+        }
+        
+        .tag:hover {
+            background: #2980b9;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .book-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .book-info h1 {
+                font-size: 2rem;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="book-card">
+            <!-- Book Header -->
+            <div class="book-header">
+                <div class="book-cover">
+                    <img src="{{ book.cover_url or '/static/default-book-cover.jpg' }}" alt="{{ book.title }} cover">
+                </div>
+                
+                <div class="book-info">
+                    <h1>{{ book.title }}</h1>
+                    <div class="author">by {{ book.author }}</div>
+                    
+                    <div class="book-meta">
+                        {% if book.year %}
+                        <div class="meta-item">
+                            <div class="meta-label">Published</div>
+                            <div class="meta-value">{{ book.year }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.publisher %}
+                        <div class="meta-item">
+                            <div class="meta-label">Publisher</div>
+                            <div class="meta-value">{{ book.publisher }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.pages %}
+                        <div class="meta-item">
+                            <div class="meta-label">Pages</div>
+                            <div class="meta-value">{{ book.pages }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.language %}
+                        <div class="meta-item">
+                            <div class="meta-label">Language</div>
+                            <div class="meta-value">{{ book.language }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.file_format %}
+                        <div class="meta-item">
+                            <div class="meta-label">Format</div>
+                            <div class="meta-value">{{ book.file_format }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.file_size %}
+                        <div class="meta-item">
+                            <div class="meta-label">File Size</div>
+                            <div class="meta-value">{{ book.file_size }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if book.isbn %}
+                        <div class="meta-item">
+                            <div class="meta-label">ISBN</div>
+                            <div class="meta-value">{{ book.isbn }}</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if book.genre %}
+                    <div class="tags">
+                        {% for genre in book.genre %}
+                        <span class="tag">{{ genre }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Description -->
+            {% if book.description %}
+            <div class="description">
+                <h3>📖 Description</h3>
+                <p>{{ book.description }}</p>
+            </div>
+            {% endif %}
+            
+            <!-- Download Section -->
+            <div class="download-section">
+                <h2>📥 Download {{ book.title }}</h2>
+                <p>Free download available in {{ book.file_format or 'PDF' }} format</p>
+                
+                <div class="download-buttons">
+                    {% if book.download_url %}
+                    <a href="{{ book.download_url }}" class="btn btn-primary" target="_blank">
+                        📄 Download {{ book.file_format or 'PDF' }}
+                    </a>
+                    {% endif %}
+                    
+                    {% if book.mirrors %}
+                        {% for mirror in book.mirrors[:3] %}
+                        <a href="{{ mirror }}" class="btn btn-secondary" target="_blank">
+                            🔗 Mirror {{ loop.index }}
+                        </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Affiliate Links -->
+            {% if book.amazon_link or book.ebay_link or book.google_books_link %}
+            <div class="affiliate-links">
+                <h3>🛒 Buy this book</h3>
+                <div class="affiliate-grid">
+                    {% if book.amazon_link %}
+                    <a href="{{ book.amazon_link }}" class="affiliate-item" target="_blank">
+                        📚 Amazon
+                    </a>
+                    {% endif %}
+                    
+                    {% if book.ebay_link %}
+                    <a href="{{ book.ebay_link }}" class="affiliate-item" target="_blank">
+                        🏪 eBay
+                    </a>
+                    {% endif %}
+                    
+                    {% if book.google_books_link %}
+                    <a href="{{ book.google_books_link }}" class="affiliate-item" target="_blank">
+                        📖 Google Books
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
