@@ -1,0 +1,67 @@
+# Core scraping dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+aiohttp>=3.9.0
+selenium>=4.15.0
+
+# Data processing
+pandas>=2.1.0
+numpy>=1.24.0
+python-slugify>=8.0.0
+
+# File handling
+Pillow>=10.0.0
+PyPDF2>=3.0.0
+
+# Google APIs
+google-api-python-client>=2.100.0
+google-auth-httplib2>=0.1.1
+google-auth-oauthlib>=1.1.0
+google-auth>=2.23.0
+
+# WordPress/CMS
+python-wordpress-xmlrpc>=2.3
+requests-oauthlib>=1.3.1
+
+# Database
+sqlite3
+
+# FTP
+paramiko>=3.3.0
+
+# Video generation (Advanced tier)
+moviepy>=1.0.3
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Text-to-speech
+gTTS>=2.4.0
+pydub>=0.25.0
+
+# Telegram bot
+python-telegram-bot>=20.6
+
+# HTML templating
+Jinja2>=3.1.0
+MarkupSafe>=2.1.0
+
+# Configuration
+python-decouple>=3.8
+pydantic>=2.4.0
+
+# Scheduling
+APScheduler>=3.10.0
+
+# CLI
+click>=8.1.0
+rich>=13.6.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Development
+black>=23.9.0
+flake8>=6.1.0
+pre-commit>=3.4.0
