@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Simple Individual Z-Library Bot
-Easy to use, focused implementation
+Simple Z-Library Bot
+Easy-to-use individual bot for quick searches
 """
 
 import asyncio
@@ -16,25 +16,26 @@ def check_zlibrary():
         return True, zlibrary
     except ImportError:
         print("❌ zlibrary not installed")
-        print("Install with: pip install zlibrary")
+        print("Install: pip install --break-system-packages zlibrary")
         return False, None
 
 class SimpleZBot:
-    """Simple individual Z-Library bot"""
+    """Simple Z-Library bot"""
     
     def __init__(self):
-        """Initialize simple bot"""
+        """Initialize bot"""
         self.available, self.zlibrary = check_zlibrary()
         self.lib = None
-        self.output_dir = Path("simple_zbot_output")
+        self.output_dir = Path("simple_bot_results")
         self.output_dir.mkdir(exist_ok=True)
         
-        print(f"📁 Output: {self.output_dir}")
-    
+        if self.available:
+            print("✅ Z-Library ready")
+            print(f"📁 Output: {self.output_dir}")
+        
     async def connect(self, email=None, password=None):
         """Connect to Z-Library"""
         if not self.available:
-            print("❌ Cannot connect - zlibrary not available")
             return False
         
         try:
@@ -71,98 +72,83 @@ class SimpleZBot:
             print(f"❌ Search failed: {e}")
             return []
     
-    def save(self, results, name="search_results"):
-        """Save results to JSON"""
+    def save(self, results, filename=None):
+        """Save results"""
         if not results:
-            print("No results to save")
             return
         
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{name}_{timestamp}.json"
+        if not filename:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"search_{timestamp}.json"
+        
         filepath = self.output_dir / filename
         
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(results, f, indent=2, ensure_ascii=False)
+            json.dump(results, f, indent=2)
         
         print(f"💾 Saved: {filepath}")
         return filepath
     
     def show(self, results, max_items=5):
-        """Display results nicely"""
+        """Display results"""
         if not results:
-            print("No results to show")
+            print("No results")
             return
         
-        print(f"\n📚 Showing {min(len(results), max_items)} of {len(results)} results:")
-        print("-" * 60)
+        print(f"\n📚 {min(len(results), max_items)} of {len(results)} results:")
+        print("-" * 50)
         
         for i, book in enumerate(results[:max_items], 1):
-            title = book.get('name', 'Unknown Title')
+            title = book.get('name', 'Unknown')
             authors = book.get('authors', [])
             author_names = ", ".join([a.get('author', 'Unknown') for a in authors])
             year = book.get('year', 'Unknown')
             format_type = book.get('extension', 'Unknown')
-            size = book.get('size', 'Unknown')
             
             print(f"\n{i}. {title}")
             print(f"   Author: {author_names}")
-            print(f"   Year: {year} | Format: {format_type} | Size: {size}")
-            
-            if book.get('url'):
-                print(f"   URL: {book.get('url')}")
+            print(f"   Year: {year} | Format: {format_type}")
 
 
 async def quick_demo():
-    """Quick demonstration"""
+    """Quick demo"""
     print("🚀 Simple Z-Library Bot Demo")
-    print("=" * 40)
+    print("=" * 35)
     
-    # Create bot
     bot = SimpleZBot()
     
-    # Connect (without login for demo)
     if not await bot.connect():
         return
     
-    # Example searches
-    searches = [
-        ("python programming", 3),
-        ("machine learning", 3),
-        ("web development", 3)
-    ]
+    # Demo searches
+    searches = ["python programming", "machine learning", "web development"]
     
-    all_results = []
-    
-    for query, count in searches:
-        results = await bot.search(query, count)
+    for query in searches:
+        results = await bot.search(query, 3)
         if results:
-            bot.show(results, max_items=2)
-            bot.save(results, query.replace(' ', '_'))
-            all_results.extend(results)
+            bot.show(results, 2)
+            bot.save(results, f"{query.replace(' ', '_')}.json")
     
-    print(f"\n✅ Demo completed!")
-    print(f"📚 Total books found: {len(all_results)}")
-    print(f"📁 Files saved in: {bot.output_dir}")
+    print(f"\n✅ Demo completed! Check {bot.output_dir}")
 
 
 async def interactive():
     """Interactive mode"""
     print("🎮 Interactive Z-Library Search")
-    print("=" * 35)
+    print("=" * 30)
     
     bot = SimpleZBot()
     
-    # Get login info
-    print("\nLogin (optional - press Enter to skip):")
-    email = input("Email: ").strip() or None
-    password = input("Password: ").strip() or None
+    # Optional login
+    email = input("Email (optional): ").strip() or None
+    password = input("Password (optional): ").strip() or None
     
     if not await bot.connect(email, password):
         return
     
     while True:
-        print("\n" + "="*30)
-        query = input("Search query (or 'quit' to exit): ").strip()
+        print("\n" + "="*25)
+        query = input("Search (or 'quit'): ").strip()
         
         if query.lower() in ['quit', 'exit', 'q']:
             print("👋 Goodbye!")
@@ -172,7 +158,7 @@ async def interactive():
             continue
         
         try:
-            count = int(input("Number of results (default 10): ").strip() or 10)
+            count = int(input("Results (default 10): ").strip() or 10)
         except ValueError:
             count = 10
         
@@ -181,20 +167,18 @@ async def interactive():
         if results:
             bot.show(results)
             
-            save_choice = input("\nSave results? (y/n): ").strip().lower()
-            if save_choice == 'y':
-                name = input("Filename (optional): ").strip() or query.replace(' ', '_')
+            if input("Save? (y/n): ").lower() == 'y':
+                name = input("Filename: ").strip() or None
                 bot.save(results, name)
 
 
 def main():
     """Main function"""
-    print("🔷 Simple Individual Z-Library Bot")
-    print("Choose mode:")
+    print("🔷 Simple Z-Library Bot")
     print("1. Quick demo")
     print("2. Interactive search")
     
-    choice = input("\nEnter choice (1 or 2): ").strip()
+    choice = input("Choose (1 or 2): ").strip()
     
     if choice == "1":
         asyncio.run(quick_demo())
