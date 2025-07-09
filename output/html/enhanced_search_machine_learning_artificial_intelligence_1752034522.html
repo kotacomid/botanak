@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search Results: machine learning artificial intelligence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        .book-card {
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        .book-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .book-thumbnail {
+            width: 80px;
+            height: 120px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+            font-size: 0.8em;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .book-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .book-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .book-author {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .book-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .meta-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #34495e;
+        }
+        .source-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            margin: 5px 0;
+        }
+        .source-annas_archive { background: #e74c3c; }
+        .source-openlibrary { background: #2ecc71; }
+        .source-google_books { background: #3498db; }
+        .source-internet_archive { background: #f39c12; }
+        .book-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        .description {
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Book Search Results</h1>
+            <p>Search query: "machine learning artificial intelligence"</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Sources</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">8</div>
+                <div class="stat-label">With Year</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">With ISBN</div>
+            </div>
+        </div>
+        
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .epub, 🚀/lgli/lgrs/nexusstc/scihub/zlib, 17.1MB, 📘 Book (non-fiction), nexusstc/A Machine Learning, Artificial Intelligence Approach to Institutional Effectiveness in Higher Education/6c9d91d9cb60235179a28666e7a3e314.epubA Machine Learning, Artificial Intelligence Approach to Institutional Effectiveness in Higher EducationEmerald Publishing Limited, First edition 2019, Bingley, UK, 2019John N. Moye Ph.D.base score: 11065.0, final score: 167549.75</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2019</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/6c9d91d9cb60235179a28666e7a3e314" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 1.4MB, 📘 Book (non-fiction), nexusstc/Python Machine Learning. A Crash Course for Beginners to Understand Machine learning, Artificial Intelligence, Neural Networks, and Deep Learning with Scikit-Learn, TensorFlow, and Keras./47985e4de104e7979df94224acf8eb06.pdfPython Machine Learning. A Crash Course for Beginners to Understand Machine learning, Artificial Intelligence, Neural Networks, and Deep Learning with Scikit-Learn, TensorFlow, and Keras.2019Josh Hugh Learningbase score: 11063.0, final score: 167547.1</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2019</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/47985e4de104e7979df94224acf8eb06" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .epub, 🚀/lgli/lgrs/nexusstc/zlib, 8.7MB, 📘 Book (non-fiction), nexusstc/PYTHON FOR DATA SCIENCE: Guide to computer programming and web coding. Learn machine learning, artificial intelligence, NumPy and Pandas packages for data analysis. Step-by-step exercises included./1c2358ca236ee9efa062959ebcc0c83f.epubPYTHON FOR DATA SCIENCE: Guide to computer programming and web coding. Learn machine learning, artificial intelligence, NumPy and Pandas packages for data analysis. Step-by-step exercises included.2020Jason  Testbase score: 11063.0, final score: 167546.0</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2020</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/1c2358ca236ee9efa062959ebcc0c83f" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Machine Learning, Artificial Intelligence and Urban Assemblages</div>
+                        <div class="book-author">by Silvio Carta</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2022</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 111981507X</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Wiley & Sons, Incorporated, John</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL25339063W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">?????????????</div>
+                        <div class="book-author">by QianFeng Xie</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 1955607745</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> LONGMAN PRESS LTD</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL26955922W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Feature Projection in Machine Learning</div>
+                        <div class="book-author">by Landa RAO, Karakavalasa DURGA AKHIL</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9798505814994</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Independently Published</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL35957050W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">How Artificial Intelligence and Machine Learning can Assist in Collections Curation</div>
+                        <div class="book-author">by Checksfield, Simon</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2019-06-21T00:00:00Z</div>
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Pensoft Publishers</div>
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/howartificialin3chec" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/howartificialin3chec" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Artificial Intelligence; Machine Learning; CIA MK Ultra; Mind Control; A Blog By Dianne Marshall; Showing a Live Demonstration;</div>
+                        <div class="book-author">by Robert Gregory Boensch</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2023-03-03T00:00:00Z</div>
+                    
+                    
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 464</div>
+                </div>
+                
+                <div class="description">up date 2023-04-11 Live action Crime in Place How to Destroy evidence Archive.Org with my post diannemarshallreport.com/and-now-meet-bill-barr-again/ and after deleting all my posts  And this one with...</div>
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/artifi-1" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/artifi-1" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Artificial Intelligence And Machine Learning Ar V 1.0.0</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    
+                    
+                    
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 92</div>
+                </div>
+                
+                <div class="description">مدخل الى الذكاء الاصتناعي...</div>
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/artificial-intelligence-and-machine-learning-ar-v-1.0.0" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/artificial-intelligence-and-machine-learning-ar-v-1.0.0" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Generated by Enhanced Book Scraping Bot | Data sources: Anna's Archive, OpenLibrary, Google Books, Internet Archive</p>
+        </div>
+    </div>
+</body>
+</html>

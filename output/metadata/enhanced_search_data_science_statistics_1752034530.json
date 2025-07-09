@@ -1,0 +1,167 @@
+{
+  "query": "data science statistics",
+  "timestamp": 1752034530,
+  "total_results": 10,
+  "sources_used": [
+    "internet_archive",
+    "openlibrary",
+    "annas_archive",
+    "google_books"
+  ],
+  "books": [
+    {
+      "title": "English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 9.7MB, 📘 Book (non-fiction), nexusstc/Clojure for Data Science: Statistics, big data, and machine learning for Clojure programmers/2a4f860fab2b05ffc949e9cb18663e8c.pdfClojure for Data Science : Statistics, Big Data, and Machine Learning for Clojure ProgrammersPackt Publishing - ebooks Account, Packt Publishing, Birmingham, UK, 2015Henry Garnerbase score: 11065.0, final score: 167531.88",
+      "author": "Unknown Author",
+      "year": 2015,
+      "filesize": "9.7MB",
+      "filetype": "PDF",
+      "source": "annas_archive",
+      "url": "https://annas-archive.org/md5/2a4f860fab2b05ffc949e9cb18663e8c",
+      "available": true
+    },
+    {
+      "title": "English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 13.1MB, 📘 Book (non-fiction), nexusstc/Becoming a Data Head: How to Think, Speak and Understand Data Science, Statistics and Machine Learning/bf4e2556c711db7a9b8019af882d3d7f.pdfBecoming a data head : how to think, speak, and understand data science, statistics, and machine learningWiley Professional Development (P&T), 1, 20210413Alex J. Gutman, Jordan Goldmeierbase score: 11065.0, final score: 167524.3",
+      "author": "Unknown Author",
+      "year": null,
+      "filesize": "13.1MB",
+      "filetype": "PDF",
+      "source": "annas_archive",
+      "url": "https://annas-archive.org/md5/bf4e2556c711db7a9b8019af882d3d7f",
+      "available": true
+    },
+    {
+      "title": "Superlative 2023 Data Science for Beginners",
+      "author": "Maya Clinton",
+      "year": 2022,
+      "isbn": "9798830069335",
+      "publisher": "Independently Published",
+      "pages": null,
+      "language": "eng",
+      "subjects": [],
+      "source": "openlibrary",
+      "url": "https://openlibrary.org/works/OL28153539W",
+      "available": true
+    },
+    {
+      "title": "Becoming a Data Head",
+      "author": "Alex J. Gutman, Jordan Goldmeier",
+      "year": 2021,
+      "isbn": "9781119741749",
+      "publisher": "Wiley & Sons, Limited, John",
+      "pages": null,
+      "language": "eng",
+      "subjects": [],
+      "source": "openlibrary",
+      "url": "https://openlibrary.org/works/OL25259106W",
+      "available": true
+    },
+    {
+      "title": "Applied Statistics and Data Science",
+      "author": "Yogendra P. Chaubey, Salim Lahmiri",
+      "year": 2021,
+      "isbn": "3030861325",
+      "publisher": "Springer International Publishing AG",
+      "pages": null,
+      "language": "eng",
+      "subjects": [],
+      "source": "openlibrary",
+      "url": "https://openlibrary.org/works/OL25805044W",
+      "available": true
+    },
+    {
+      "title": "Practical Statistics for Data Scientists",
+      "author": "Peter Bruce, Andrew Bruce",
+      "year": "2017",
+      "isbn": "9781491952931",
+      "publisher": "\"O'Reilly Media, Inc.\"",
+      "pages": 317,
+      "language": "en",
+      "description": "Statistical methods are a key part of of data science, yet very few data scientists have any formal statistics training. Courses and books on basic statistics rarely cover the topic from a data science perspective. This practical guide explains how to apply various statistical methods to data science, tells you how to avoid their misuse, and gives you advice on what's important and what's not. Many data science resources incorporate statistical methods but lack a deeper statistical perspective. ",
+      "categories": [
+        "Computers"
+      ],
+      "rating": null,
+      "source": "google_books",
+      "url": "http://books.google.com/books?id=JtPTDgAAQBAJ&dq=data+science+statistics&hl=&as_pt=BOOKS&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=JtPTDgAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=1&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=JtPTDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "Computational Statistics in Data Science",
+      "author": "Walter W. Piegorsch, Richard A. Levine, Hao Helen Zhang, Thomas C. M. Lee",
+      "year": "2022",
+      "isbn": "9781119561088",
+      "publisher": "John Wiley & Sons",
+      "pages": 853,
+      "language": "de",
+      "description": "Ein unverzichtbarer Leitfaden bei der Anwendung computergestützter Statistik in der modernen Datenwissenschaft In Computational Statistics in Data Science präsentiert ein Team aus bekannten Mathematikern und Statistikern eine fundierte Zusammenstellung von Konzepten, Theorien, Techniken und Praktiken der computergestützten Statistik für ein Publikum, das auf der Suche nach einem einzigen, umfassenden Referenzwerk für Statistik in der modernen Datenwissenschaft ist. Das Buch enthält etliche Kapit",
+      "categories": [
+        "Mathematics"
+      ],
+      "rating": null,
+      "source": "google_books",
+      "url": "https://play.google.com/store/books/details?id=m-1lEAAAQBAJ&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=m-1lEAAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=2&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=m-1lEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "Statistics for Health Data Science",
+      "author": "Ruth Etzioni, Micha Mandel, Roman Gulati",
+      "year": "2021",
+      "isbn": "9783030598891",
+      "publisher": "Springer Nature",
+      "pages": 238,
+      "language": "en",
+      "description": "Students and researchers in the health sciences are faced with greater opportunity and challenge than ever before. The opportunity stems from the explosion in publicly available data that simultaneously informs and inspires new avenues of investigation. The challenge is that the analytic tools required go far beyond the standard methods and models of basic statistics. This textbook aims to equip health care researchers with the most important elements of a modern health analytics toolkit, drawin",
+      "categories": [
+        "Medical"
+      ],
+      "rating": null,
+      "source": "google_books",
+      "url": "https://play.google.com/store/books/details?id=kB8SEAAAQBAJ&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=kB8SEAAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=3&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=kB8SEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "The Data Game: Controversies in Social Science Statistics",
+      "author": "Mark H. Maier",
+      "year": "1991-01-01T00:00:00Z",
+      "publisher": "M.E. Sharpe, Inc.",
+      "description": "",
+      "downloads": 11,
+      "formats": [
+        "ACS Encrypted EPUB",
+        "ACS Encrypted PDF",
+        "Abbyy GZ",
+        "Cloth Cover Detection Log",
+        "DjVuTXT"
+      ],
+      "source": "internet_archive",
+      "url": "https://archive.org/details/isbn_9780873327688",
+      "download_url": "https://archive.org/download/isbn_9780873327688",
+      "available": true
+    },
+    {
+      "title": "Setting the stage for data science: integration of data management skills in introductory and second courses in statistics",
+      "author": "Nicholas J. Horton, Benjamin S. Baumer",
+      "year": "2015-02-01T00:00:00Z",
+      "publisher": "arXiv.org",
+      "description": "Many have argued that statistics students need additional facility to express statistical computations. By introducing students to commonplace tools for data management, visualization, and reproducible analysis in data science and applying these to real-world scenarios, we prepare them to think stat",
+      "downloads": 51,
+      "formats": [
+        "Abbyy GZ",
+        "Archive BitTorrent",
+        "DjVuTXT",
+        "Djvu XML",
+        "JPEG Thumb"
+      ],
+      "source": "internet_archive",
+      "url": "https://archive.org/details/arxiv-1502.00318",
+      "download_url": "https://archive.org/download/arxiv-1502.00318",
+      "available": true
+    }
+  ]
+}

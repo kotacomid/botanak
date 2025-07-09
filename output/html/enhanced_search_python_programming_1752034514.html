@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search Results: python programming</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        .book-card {
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        .book-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .book-thumbnail {
+            width: 80px;
+            height: 120px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+            font-size: 0.8em;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .book-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .book-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .book-author {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .book-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .meta-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #34495e;
+        }
+        .source-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            margin: 5px 0;
+        }
+        .source-annas_archive { background: #e74c3c; }
+        .source-openlibrary { background: #2ecc71; }
+        .source-google_books { background: #3498db; }
+        .source-internet_archive { background: #f39c12; }
+        .book-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        .description {
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Book Search Results</h1>
+            <p>Search query: "python programming"</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Sources</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">11</div>
+                <div class="stat-label">With Year</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5</div>
+                <div class="stat-label">With ISBN</div>
+            </div>
+        </div>
+        
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .pdf, 🚀/lgli/lgrs/nexusstc/upload/zlib, 10.4MB, 📘 Book (non-fiction), upload/newsarch_ebooks/2019/10/13/B01MYG5I4C.pdfPython Programming.  Python Programming for Beginners, Python Programming for IntermediatesIndependently published, 2016Adam Stewartbase score: 11065.0, final score: 167520.56</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2019</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/41191927a7d7b5d61399e368145a703b" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .epub, 🚀/lgli/lgrs/nexusstc/zlib, 12.0MB, 📘 Book (non-fiction), nexusstc/Python Programming for Beginners : The Ultimate Guide for Beginners to Learn Python Programming: Crash Course on Python Programming for Beginners (Python Programming Books Book 1)/f87448722f0072549206b63999ec39e1.epubPython Programming for Beginners : The Ultimate Guide for Beginners to Learn Python Programming: Crash Course on Python Programming for Beginners (Python Programming Books Book 1)2021Publishing, AMZbase score: 11060.0, final score: 167520.5</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/f87448722f0072549206b63999ec39e1" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 4.4MB, 📘 Book (non-fiction), nexusstc/Python Programming for Beginners: The Simplified Beginner's Guide to Mastering Python Programming in One Week/fd1812d07b1c48f87e69d420e5f5872e.pdfPython Programming for Beginners: The Simplified Beginner's Guide to Mastering Python Programming in One WeekIndependently published, 2023Gowen, Markbase score: 11065.0, final score: 167520.11</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2023</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/fd1812d07b1c48f87e69d420e5f5872e" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Core Python Programming</div>
+                        <div class="book-author">by R. Nageswara Rao</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2016</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9351199428</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> 2017</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL30906747W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Black Hat Python: Python Programming for Hackers and Pentesters</div>
+                        <div class="book-author">by Justin Seitz, Tim Arnold</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2014</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 8328312506</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Wydawnictwo Helion</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> pol</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL19547345W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=4pgQfXQvekcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Learning Python</div>
+                        <div class="book-author">by Mark Lutz</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2013</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 1733</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9781449355692</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> "O'Reilly Media, Inc."</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> en</div>
+                    
+                </div>
+                
+                <div class="description">Get a comprehensive, in-depth introduction to the core Python language with this hands-on book. Based on author Mark Lutz’s popular training course, this updated fifth edition will help you quickly wr...</div>
+                
+                <div class="book-actions">
+                    <a href="http://books.google.com/books?id=4pgQfXQvekcC&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=4pgQfXQvekcC&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=1&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=T5bRDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Introduction to Computation and Programming Using Python, second edition</div>
+                        <div class="book-author">by John V. Guttag</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2016</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 466</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9780262337397</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> MIT Press</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> en</div>
+                    
+                </div>
+                
+                <div class="description">The new edition of an introductory text that teaches students the art of computational problem solving, covering topics ranging from simple algorithms to information visualization. This book introduce...</div>
+                
+                <div class="book-actions">
+                    <a href="http://books.google.com/books?id=T5bRDAAAQBAJ&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=T5bRDAAAQBAJ&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=2&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=aJQILlLxRmAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Python Programming</div>
+                        <div class="book-author">by John M. Zelle</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2004</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 533</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9781887902991</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Franklin, Beedle & Associates, Inc.</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> en</div>
+                    
+                </div>
+                
+                <div class="description">This book is suitable for use in a university-level first course in computing (CS1), as well as the increasingly popular course known as CS0. It is difficult for many students to master basic concepts...</div>
+                
+                <div class="book-actions">
+                    <a href="http://books.google.com/books?id=aJQILlLxRmAC&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=aJQILlLxRmAC&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=3&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Python Web programming</div>
+                        <div class="book-author">by Holden, Steve, 1950-</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2002-01-01T00:00:00Z</div>
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Indianapolis, Ind. : New Riders</div>
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 92</div>
+                </div>
+                
+                <div class="description">['xxi, 691 p. : 23 cm', 'Includes index']...</div>
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/pythonwebprogram0000hold_a6l4" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/pythonwebprogram0000hold_a6l4" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Introduction to Programming Using Python Prelim for Albright</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2011-01-01T00:00:00Z</div>
+                    
+                    
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 6</div>
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/isbn_9781119946762" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/isbn_9781119946762" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Teach your kids to code : a parent-friendly guide to Python programming</div>
+                        <div class="book-author">by Payne, Bryson</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2015-01-01T00:00:00Z</div>
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> San Francisco : No Starch Press</div>
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 187</div>
+                </div>
+                
+                <div class="description">['1 online resource (xxvi, 308 pages) :', '"A guide to teaching basic programming skills for parents and teachers, with step-by-step explanations, visual examples, and exercises. Covers programming concepts including loops, lists, functions, and variables, and how to build games and applications"--', 'Includes index', 'What is coding? -- Python basics -- Turtle graphics -- Numbers and variables -- Loops are fun -- Conditions -- Random fun -- Functions -- Timers and animation -- User interaction -- Game programming -- Beyond the book -- Python setup for PC and Mac -- Pygame setup -- Building your own modules -- Solutions to programming challenges', 'Includes bibliographical references and index', 'Print version record']...</div>
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/teachyourkidstocode" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/teachyourkidstocode" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Generated by Enhanced Book Scraping Bot | Data sources: Anna's Archive, OpenLibrary, Google Books, Internet Archive</p>
+        </div>
+    </div>
+</body>
+</html>

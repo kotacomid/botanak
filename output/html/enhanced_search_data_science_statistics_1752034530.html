@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search Results: data science statistics</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        .book-card {
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        .book-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .book-thumbnail {
+            width: 80px;
+            height: 120px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+            font-size: 0.8em;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .book-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .book-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .book-author {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .book-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .meta-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #34495e;
+        }
+        .source-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            margin: 5px 0;
+        }
+        .source-annas_archive { background: #e74c3c; }
+        .source-openlibrary { background: #2ecc71; }
+        .source-google_books { background: #3498db; }
+        .source-internet_archive { background: #f39c12; }
+        .book-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        .description {
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Book Search Results</h1>
+            <p>Search query: "data science statistics"</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Sources</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">9</div>
+                <div class="stat-label">With Year</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">6</div>
+                <div class="stat-label">With ISBN</div>
+            </div>
+        </div>
+        
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 9.7MB, 📘 Book (non-fiction), nexusstc/Clojure for Data Science: Statistics, big data, and machine learning for Clojure programmers/2a4f860fab2b05ffc949e9cb18663e8c.pdfClojure for Data Science : Statistics, Big Data, and Machine Learning for Clojure ProgrammersPackt Publishing - ebooks Account, Packt Publishing, Birmingham, UK, 2015Henry Garnerbase score: 11065.0, final score: 167531.88</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2015</div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/2a4f860fab2b05ffc949e9cb18663e8c" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 13.1MB, 📘 Book (non-fiction), nexusstc/Becoming a Data Head: How to Think, Speak and Understand Data Science, Statistics and Machine Learning/bf4e2556c711db7a9b8019af882d3d7f.pdfBecoming a data head : how to think, speak, and understand data science, statistics, and machine learningWiley Professional Development (P&T), 1, 20210413Alex J. Gutman, Jordan Goldmeierbase score: 11065.0, final score: 167524.3</div>
+                        <div class="book-author">by Unknown Author</div>
+                        <span class="source-badge source-annas_archive">Annas Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://annas-archive.org/md5/bf4e2556c711db7a9b8019af882d3d7f" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Superlative 2023 Data Science for Beginners</div>
+                        <div class="book-author">by Maya Clinton</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2022</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9798830069335</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Independently Published</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL28153539W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Becoming a Data Head</div>
+                        <div class="book-author">by Alex J. Gutman, Jordan Goldmeier</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9781119741749</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Wiley & Sons, Limited, John</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL25259106W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Applied Statistics and Data Science</div>
+                        <div class="book-author">by Yogendra P. Chaubey, Salim Lahmiri</div>
+                        <span class="source-badge source-openlibrary">Openlibrary</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 3030861325</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Springer International Publishing AG</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> eng</div>
+                    
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://openlibrary.org/works/OL25805044W" class="btn btn-primary" target="_blank">View Details</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=JtPTDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Practical Statistics for Data Scientists</div>
+                        <div class="book-author">by Peter Bruce, Andrew Bruce</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2017</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 317</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9781491952931</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> "O'Reilly Media, Inc."</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> en</div>
+                    
+                </div>
+                
+                <div class="description">Statistical methods are a key part of of data science, yet very few data scientists have any formal statistics training. Courses and books on basic statistics rarely cover the topic from a data scienc...</div>
+                
+                <div class="book-actions">
+                    <a href="http://books.google.com/books?id=JtPTDgAAQBAJ&dq=data+science+statistics&hl=&as_pt=BOOKS&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=JtPTDgAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=1&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=m-1lEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Computational Statistics in Data Science</div>
+                        <div class="book-author">by Walter W. Piegorsch, Richard A. Levine, Hao Helen Zhang, Thomas C. M. Lee</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2022</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 853</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9781119561088</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> John Wiley & Sons</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> de</div>
+                    
+                </div>
+                
+                <div class="description">Ein unverzichtbarer Leitfaden bei der Anwendung computergestützter Statistik in der modernen Datenwissenschaft In Computational Statistics in Data Science präsentiert ein Team aus bekannten Mathematik...</div>
+                
+                <div class="book-actions">
+                    <a href="https://play.google.com/store/books/details?id=m-1lEAAAQBAJ&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=m-1lEAAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=2&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail"><img src="http://books.google.com/books/content?id=kB8SEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="Book cover"></div>
+                    <div class="book-info">
+                        <div class="book-title">Statistics for Health Data Science</div>
+                        <div class="book-author">by Ruth Etzioni, Micha Mandel, Roman Gulati</div>
+                        <span class="source-badge source-google_books">Google Books</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2021</div>
+                    <div class="meta-item"><span class="meta-label">Pages:</span> 238</div>
+                    <div class="meta-item"><span class="meta-label">ISBN:</span> 9783030598891</div>
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> Springer Nature</div>
+                    <div class="meta-item"><span class="meta-label">Language:</span> en</div>
+                    
+                </div>
+                
+                <div class="description">Students and researchers in the health sciences are faced with greater opportunity and challenge than ever before. The opportunity stems from the explosion in publicly available data that simultaneous...</div>
+                
+                <div class="book-actions">
+                    <a href="https://play.google.com/store/books/details?id=kB8SEAAAQBAJ&source=gbs_api" class="btn btn-primary" target="_blank">View Details</a><a href="http://books.google.com/books?id=kB8SEAAAQBAJ&printsec=frontcover&dq=data+science+statistics&hl=&as_pt=BOOKS&cd=3&source=gbs_api" class="btn btn-secondary" target="_blank">Preview</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">The Data Game: Controversies in Social Science Statistics</div>
+                        <div class="book-author">by Mark H. Maier</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 1991-01-01T00:00:00Z</div>
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> M.E. Sharpe, Inc.</div>
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 11</div>
+                </div>
+                
+                
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/isbn_9780873327688" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/isbn_9780873327688" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-header">
+                    <div class="book-thumbnail">No Cover</div>
+                    <div class="book-info">
+                        <div class="book-title">Setting the stage for data science: integration of data management skills in introductory and second courses in statistics</div>
+                        <div class="book-author">by Nicholas J. Horton, Benjamin S. Baumer</div>
+                        <span class="source-badge source-internet_archive">Internet Archive</span>
+                    </div>
+                </div>
+                
+                <div class="book-meta">
+                    <div class="meta-item"><span class="meta-label">Year:</span> 2015-02-01T00:00:00Z</div>
+                    
+                    
+                    <div class="meta-item"><span class="meta-label">Publisher:</span> arXiv.org</div>
+                    
+                    <div class="meta-item"><span class="meta-label">Downloads:</span> 51</div>
+                </div>
+                
+                <div class="description">Many have argued that statistics students need additional facility to express statistical computations. By introducing students to commonplace tools for data management, visualization, and reproducibl...</div>
+                
+                <div class="book-actions">
+                    <a href="https://archive.org/details/arxiv-1502.00318" class="btn btn-primary" target="_blank">View Details</a><a href="https://archive.org/download/arxiv-1502.00318" class="btn btn-primary" target="_blank">Download</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Generated by Enhanced Book Scraping Bot | Data sources: Anna's Archive, OpenLibrary, Google Books, Internet Archive</p>
+        </div>
+    </div>
+</body>
+</html>

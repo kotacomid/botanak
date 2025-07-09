@@ -1,0 +1,199 @@
+{
+  "query": "python programming",
+  "timestamp": 1752034514,
+  "total_results": 11,
+  "sources_used": [
+    "internet_archive",
+    "openlibrary",
+    "annas_archive",
+    "google_books"
+  ],
+  "books": [
+    {
+      "title": "English [en], .pdf, 🚀/lgli/lgrs/nexusstc/upload/zlib, 10.4MB, 📘 Book (non-fiction), upload/newsarch_ebooks/2019/10/13/B01MYG5I4C.pdfPython Programming.  Python Programming for Beginners, Python Programming for IntermediatesIndependently published, 2016Adam Stewartbase score: 11065.0, final score: 167520.56",
+      "author": "Unknown Author",
+      "year": 2019,
+      "filesize": "10.4MB",
+      "filetype": "PDF",
+      "source": "annas_archive",
+      "url": "https://annas-archive.org/md5/41191927a7d7b5d61399e368145a703b",
+      "available": true
+    },
+    {
+      "title": "English [en], .epub, 🚀/lgli/lgrs/nexusstc/zlib, 12.0MB, 📘 Book (non-fiction), nexusstc/Python Programming for Beginners : The Ultimate Guide for Beginners to Learn Python Programming: Crash Course on Python Programming for Beginners (Python Programming Books Book 1)/f87448722f0072549206b63999ec39e1.epubPython Programming for Beginners : The Ultimate Guide for Beginners to Learn Python Programming: Crash Course on Python Programming for Beginners (Python Programming Books Book 1)2021Publishing, AMZbase score: 11060.0, final score: 167520.5",
+      "author": "Unknown Author",
+      "year": 2021,
+      "filesize": "12.0MB",
+      "filetype": "EPUB",
+      "source": "annas_archive",
+      "url": "https://annas-archive.org/md5/f87448722f0072549206b63999ec39e1",
+      "available": true
+    },
+    {
+      "title": "English [en], .pdf, 🚀/lgli/lgrs/nexusstc/zlib, 4.4MB, 📘 Book (non-fiction), nexusstc/Python Programming for Beginners: The Simplified Beginner's Guide to Mastering Python Programming in One Week/fd1812d07b1c48f87e69d420e5f5872e.pdfPython Programming for Beginners: The Simplified Beginner's Guide to Mastering Python Programming in One WeekIndependently published, 2023Gowen, Markbase score: 11065.0, final score: 167520.11",
+      "author": "Unknown Author",
+      "year": 2023,
+      "filesize": "4.4MB",
+      "filetype": "PDF",
+      "source": "annas_archive",
+      "url": "https://annas-archive.org/md5/fd1812d07b1c48f87e69d420e5f5872e",
+      "available": true
+    },
+    {
+      "title": "Core Python Programming",
+      "author": "R. Nageswara Rao",
+      "year": 2016,
+      "isbn": "9351199428",
+      "publisher": "2017",
+      "pages": null,
+      "language": "eng",
+      "subjects": [],
+      "source": "openlibrary",
+      "url": "https://openlibrary.org/works/OL30906747W",
+      "available": true
+    },
+    {
+      "title": "Black Hat Python: Python Programming for Hackers and Pentesters",
+      "author": "Justin Seitz, Tim Arnold",
+      "year": 2014,
+      "isbn": "8328312506",
+      "publisher": "Wydawnictwo Helion",
+      "pages": null,
+      "language": "pol",
+      "subjects": [
+        "Python (Computer program language)",
+        "Computer security",
+        "Python (język programowania)",
+        "Sieci komputerowe",
+        "Dostęp"
+      ],
+      "source": "openlibrary",
+      "url": "https://openlibrary.org/works/OL19547345W",
+      "available": true
+    },
+    {
+      "title": "Learning Python",
+      "author": "Mark Lutz",
+      "year": "2013",
+      "isbn": "9781449355692",
+      "publisher": "\"O'Reilly Media, Inc.\"",
+      "pages": 1733,
+      "language": "en",
+      "description": "Get a comprehensive, in-depth introduction to the core Python language with this hands-on book. Based on author Mark Lutz’s popular training course, this updated fifth edition will help you quickly write efficient, high-quality code with Python. It’s an ideal way to begin, whether you’re new to programming or a professional developer versed in other languages. Complete with quizzes, exercises, and helpful illustrations, this easy-to-follow, self-paced tutorial gets you started with both Python 2",
+      "categories": [
+        "Computers"
+      ],
+      "rating": 3.5,
+      "source": "google_books",
+      "url": "http://books.google.com/books?id=4pgQfXQvekcC&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=4pgQfXQvekcC&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=1&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=4pgQfXQvekcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "Introduction to Computation and Programming Using Python, second edition",
+      "author": "John V. Guttag",
+      "year": "2016",
+      "isbn": "9780262337397",
+      "publisher": "MIT Press",
+      "pages": 466,
+      "language": "en",
+      "description": "The new edition of an introductory text that teaches students the art of computational problem solving, covering topics ranging from simple algorithms to information visualization. This book introduces students with little or no prior programming experience to the art of computational problem solving using Python and various Python libraries, including PyLab. It provides students with skills that will enable them to make productive use of computational techniques, including some of the tools and",
+      "categories": [
+        "Computers"
+      ],
+      "rating": null,
+      "source": "google_books",
+      "url": "http://books.google.com/books?id=T5bRDAAAQBAJ&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=T5bRDAAAQBAJ&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=2&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=T5bRDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "Python Programming",
+      "author": "John M. Zelle",
+      "year": "2004",
+      "isbn": "9781887902991",
+      "publisher": "Franklin, Beedle & Associates, Inc.",
+      "pages": 533,
+      "language": "en",
+      "description": "This book is suitable for use in a university-level first course in computing (CS1), as well as the increasingly popular course known as CS0. It is difficult for many students to master basic concepts in computer science and programming. A large portion of the confusion can be blamed on the complexity of the tools and materials that are traditionally used to teach CS1 and CS2. This textbook was written with a single overarching goal: to present the core concepts of computer science as simply as ",
+      "categories": [
+        "Computers"
+      ],
+      "rating": 4,
+      "source": "google_books",
+      "url": "http://books.google.com/books?id=aJQILlLxRmAC&dq=python+programming&hl=&as_pt=BOOKS&source=gbs_api",
+      "preview_link": "http://books.google.com/books?id=aJQILlLxRmAC&printsec=frontcover&dq=python+programming&hl=&as_pt=BOOKS&cd=3&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=aJQILlLxRmAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "available": true
+    },
+    {
+      "title": "Python Web programming",
+      "author": "Holden, Steve, 1950-",
+      "year": "2002-01-01T00:00:00Z",
+      "publisher": "Indianapolis, Ind. : New Riders",
+      "description": [
+        "xxi, 691 p. : 23 cm",
+        "Includes index"
+      ],
+      "downloads": 92,
+      "formats": [
+        "ACS Encrypted PDF",
+        "Cloth Cover Detection Log",
+        "DjVuTXT",
+        "Djvu XML",
+        "Dublin Core"
+      ],
+      "source": "internet_archive",
+      "url": "https://archive.org/details/pythonwebprogram0000hold_a6l4",
+      "download_url": "https://archive.org/download/pythonwebprogram0000hold_a6l4",
+      "available": true
+    },
+    {
+      "title": "Introduction to Programming Using Python Prelim for Albright",
+      "author": "Unknown Author",
+      "year": "2011-01-01T00:00:00Z",
+      "publisher": "",
+      "description": "",
+      "downloads": 6,
+      "formats": [
+        "ACS Encrypted PDF",
+        "AVIF Thumbnails ZIP",
+        "Cloth Cover Detection Log",
+        "DjVuTXT",
+        "Djvu XML"
+      ],
+      "source": "internet_archive",
+      "url": "https://archive.org/details/isbn_9781119946762",
+      "download_url": "https://archive.org/download/isbn_9781119946762",
+      "available": true
+    },
+    {
+      "title": "Teach your kids to code : a parent-friendly guide to Python programming",
+      "author": "Payne, Bryson",
+      "year": "2015-01-01T00:00:00Z",
+      "publisher": "San Francisco : No Starch Press",
+      "description": [
+        "1 online resource (xxvi, 308 pages) :",
+        "\"A guide to teaching basic programming skills for parents and teachers, with step-by-step explanations, visual examples, and exercises. Covers programming concepts including loops, lists, functions, and variables, and how to build games and applications\"--",
+        "Includes index",
+        "What is coding? -- Python basics -- Turtle graphics -- Numbers and variables -- Loops are fun -- Conditions -- Random fun -- Functions -- Timers and animation -- User interaction -- Game programming -- Beyond the book -- Python setup for PC and Mac -- Pygame setup -- Building your own modules -- Solutions to programming challenges",
+        "Includes bibliographical references and index",
+        "Print version record"
+      ],
+      "downloads": 187,
+      "formats": [
+        "Abbyy GZ",
+        "Archive BitTorrent",
+        "DjVuTXT",
+        "Djvu XML",
+        "Dublin Core"
+      ],
+      "source": "internet_archive",
+      "url": "https://archive.org/details/teachyourkidstocode",
+      "download_url": "https://archive.org/download/teachyourkidstocode",
+      "available": true
+    }
+  ]
+}
