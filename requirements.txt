@@ -48,7 +48,6 @@ MarkupSafe>=2.1.0
 
 # Configuration
 python-decouple>=3.8
-pydantic>=2.4.0
 
 # Scheduling
 APScheduler>=3.10.0

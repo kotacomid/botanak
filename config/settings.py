@@ -5,102 +5,117 @@ Supports both Free and Paid tier features
 
 import os
 from typing import Dict, List, Optional
-from pydantic import BaseSettings, Field
 
 
-class Settings(BaseSettings):
+class Settings:
     """Main configuration class for the book scraping bot"""
     
-    # App Configuration
-    APP_NAME: str = "Book Scraping Bot"
-    VERSION: str = "1.0.0"
-    DEBUG: bool = Field(default=False, env="DEBUG")
+    def __init__(self):
+        # App Configuration
+        self.APP_NAME = "Book Scraping Bot"
+        self.VERSION = "1.0.0"
+        self.DEBUG = self._get_bool_env("DEBUG", False)
+        
+        # Tier Configuration
+        self.IS_PREMIUM = self._get_bool_env("IS_PREMIUM", False)
+        
+        # Scraping Configuration
+        self.SCRAPING_DELAY = self._get_float_env("SCRAPING_DELAY", 1.0)
+        self.MAX_RETRIES = self._get_int_env("MAX_RETRIES", 3)
+        self.TIMEOUT = self._get_int_env("TIMEOUT", 30)
+        self.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+        
+        # Sources Configuration
+        self.ANNAS_ARCHIVE_URL = "https://annas-archive.org"
+        self.LIBGEN_URLS = [
+            "https://libgen.rs",
+            "https://libgen.li", 
+            "https://libgen.is"
+        ]
+        
+        # Output Configuration
+        self.OUTPUT_DIR = os.getenv("OUTPUT_DIR", "output")
+        self.CLEAN_FILENAME = True
+        self.SAVE_METADATA_JSON = True
+        self.SAVE_METADATA_CSV = True
+        self.GENERATE_HTML = True
+        
+        # Download Configuration
+        self.DOWNLOAD_BOOKS = self._get_bool_env("DOWNLOAD_BOOKS", True)
+        self.DOWNLOAD_COVERS = self._get_bool_env("DOWNLOAD_COVERS", True)
+        self.MAX_FILE_SIZE_MB = self._get_int_env("MAX_FILE_SIZE_MB", 100)
+        
+        # Google Drive Configuration
+        self.GDRIVE_ENABLED = self._get_bool_env("GDRIVE_ENABLED", False)
+        self.GDRIVE_FOLDER_ID = os.getenv("GDRIVE_FOLDER_ID")
+        self.GDRIVE_CREDENTIALS_FILE = "config/gdrive_credentials.json"
+        self.GDRIVE_TOKEN_FILE = "config/gdrive_token.json"
+        
+        # FTP Configuration
+        self.FTP_ENABLED = self._get_bool_env("FTP_ENABLED", False)
+        self.FTP_HOST = os.getenv("FTP_HOST")
+        self.FTP_PORT = self._get_int_env("FTP_PORT", 21)
+        self.FTP_USERNAME = os.getenv("FTP_USERNAME")
+        self.FTP_PASSWORD = os.getenv("FTP_PASSWORD")
+        self.FTP_DIRECTORY = os.getenv("FTP_DIRECTORY", "/")
+        
+        # API Keys for Data Enrichment
+        self.GOOGLE_BOOKS_API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY")
+        self.OPENLIBRARY_API_URL = "https://openlibrary.org/api"
+        
+        # Affiliate Configuration
+        self.AMAZON_AFFILIATE_TAG = os.getenv("AMAZON_AFFILIATE_TAG")
+        self.EBAY_AFFILIATE_ID = os.getenv("EBAY_AFFILIATE_ID")
+        
+        # WordPress Configuration
+        self.WORDPRESS_ENABLED = self._get_bool_env("WORDPRESS_ENABLED", False)
+        self.WORDPRESS_URL = os.getenv("WORDPRESS_URL")
+        self.WORDPRESS_USERNAME = os.getenv("WORDPRESS_USERNAME")
+        self.WORDPRESS_PASSWORD = os.getenv("WORDPRESS_PASSWORD")
+        
+        # Blogspot Configuration
+        self.BLOGSPOT_ENABLED = self._get_bool_env("BLOGSPOT_ENABLED", False)
+        self.BLOGSPOT_BLOG_ID = os.getenv("BLOGSPOT_BLOG_ID")
+        self.BLOGSPOT_API_KEY = os.getenv("BLOGSPOT_API_KEY")
+        
+        # Premium Features (Paid Tier)
+        self.VIDEO_GENERATION_ENABLED = self._get_bool_env("VIDEO_GENERATION_ENABLED", False)
+        self.TELEGRAM_BOT_ENABLED = self._get_bool_env("TELEGRAM_BOT_ENABLED", False)
+        self.TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+        self.TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")
+        
+        # Analytics (Premium)
+        self.ANALYTICS_ENABLED = self._get_bool_env("ANALYTICS_ENABLED", False)
+        self.ANALYTICS_DB_PATH = "data/analytics.db"
+        
+        # Video Generation Settings (Premium)
+        self.VIDEO_WIDTH = 1080
+        self.VIDEO_HEIGHT = 1920  # Vertical for TikTok/Reels
+        self.VIDEO_FPS = 30
+        self.TTS_LANGUAGE = "en"
+        
+        # Rate Limiting
+        self.REQUESTS_PER_MINUTE = self._get_int_env("REQUESTS_PER_MINUTE", 60)
+        self.PREMIUM_REQUESTS_PER_MINUTE = self._get_int_env("PREMIUM_REQUESTS_PER_MINUTE", 300)
     
-    # Tier Configuration
-    IS_PREMIUM: bool = Field(default=False, env="IS_PREMIUM")
+    def _get_bool_env(self, key: str, default: bool) -> bool:
+        """Get boolean environment variable"""
+        value = os.getenv(key, str(default)).lower()
+        return value in ('true', '1', 'yes', 'on')
     
-    # Scraping Configuration
-    SCRAPING_DELAY: float = Field(default=1.0, env="SCRAPING_DELAY")
-    MAX_RETRIES: int = Field(default=3, env="MAX_RETRIES")
-    TIMEOUT: int = Field(default=30, env="TIMEOUT")
-    USER_AGENT: str = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+    def _get_int_env(self, key: str, default: int) -> int:
+        """Get integer environment variable"""
+        try:
+            return int(os.getenv(key, str(default)))
+        except (ValueError, TypeError):
+            return default
     
-    # Sources Configuration
-    ANNAS_ARCHIVE_URL: str = "https://annas-archive.org"
-    LIBGEN_URLS: List[str] = [
-        "https://libgen.rs",
-        "https://libgen.li", 
-        "https://libgen.is"
-    ]
-    
-    # Output Configuration
-    OUTPUT_DIR: str = Field(default="output", env="OUTPUT_DIR")
-    CLEAN_FILENAME: bool = True
-    SAVE_METADATA_JSON: bool = True
-    SAVE_METADATA_CSV: bool = True
-    GENERATE_HTML: bool = True
-    
-    # Download Configuration
-    DOWNLOAD_BOOKS: bool = Field(default=True, env="DOWNLOAD_BOOKS")
-    DOWNLOAD_COVERS: bool = Field(default=True, env="DOWNLOAD_COVERS")
-    MAX_FILE_SIZE_MB: int = Field(default=100, env="MAX_FILE_SIZE_MB")
-    
-    # Google Drive Configuration
-    GDRIVE_ENABLED: bool = Field(default=False, env="GDRIVE_ENABLED")
-    GDRIVE_FOLDER_ID: Optional[str] = Field(default=None, env="GDRIVE_FOLDER_ID")
-    GDRIVE_CREDENTIALS_FILE: str = "config/gdrive_credentials.json"
-    GDRIVE_TOKEN_FILE: str = "config/gdrive_token.json"
-    
-    # FTP Configuration
-    FTP_ENABLED: bool = Field(default=False, env="FTP_ENABLED")
-    FTP_HOST: Optional[str] = Field(default=None, env="FTP_HOST")
-    FTP_PORT: int = Field(default=21, env="FTP_PORT")
-    FTP_USERNAME: Optional[str] = Field(default=None, env="FTP_USERNAME")
-    FTP_PASSWORD: Optional[str] = Field(default=None, env="FTP_PASSWORD")
-    FTP_DIRECTORY: str = Field(default="/", env="FTP_DIRECTORY")
-    
-    # API Keys for Data Enrichment
-    GOOGLE_BOOKS_API_KEY: Optional[str] = Field(default=None, env="GOOGLE_BOOKS_API_KEY")
-    OPENLIBRARY_API_URL: str = "https://openlibrary.org/api"
-    
-    # Affiliate Configuration
-    AMAZON_AFFILIATE_TAG: Optional[str] = Field(default=None, env="AMAZON_AFFILIATE_TAG")
-    EBAY_AFFILIATE_ID: Optional[str] = Field(default=None, env="EBAY_AFFILIATE_ID")
-    
-    # WordPress Configuration
-    WORDPRESS_ENABLED: bool = Field(default=False, env="WORDPRESS_ENABLED")
-    WORDPRESS_URL: Optional[str] = Field(default=None, env="WORDPRESS_URL")
-    WORDPRESS_USERNAME: Optional[str] = Field(default=None, env="WORDPRESS_USERNAME")
-    WORDPRESS_PASSWORD: Optional[str] = Field(default=None, env="WORDPRESS_PASSWORD")
-    
-    # Blogspot Configuration
-    BLOGSPOT_ENABLED: bool = Field(default=False, env="BLOGSPOT_ENABLED")
-    BLOGSPOT_BLOG_ID: Optional[str] = Field(default=None, env="BLOGSPOT_BLOG_ID")
-    BLOGSPOT_API_KEY: Optional[str] = Field(default=None, env="BLOGSPOT_API_KEY")
-    
-    # Premium Features (Paid Tier)
-    VIDEO_GENERATION_ENABLED: bool = Field(default=False, env="VIDEO_GENERATION_ENABLED")
-    TELEGRAM_BOT_ENABLED: bool = Field(default=False, env="TELEGRAM_BOT_ENABLED")
-    TELEGRAM_BOT_TOKEN: Optional[str] = Field(default=None, env="TELEGRAM_BOT_TOKEN")
-    TELEGRAM_CHANNEL_ID: Optional[str] = Field(default=None, env="TELEGRAM_CHANNEL_ID")
-    
-    # Analytics (Premium)
-    ANALYTICS_ENABLED: bool = Field(default=False, env="ANALYTICS_ENABLED")
-    ANALYTICS_DB_PATH: str = "data/analytics.db"
-    
-    # Video Generation Settings (Premium)
-    VIDEO_WIDTH: int = 1080
-    VIDEO_HEIGHT: int = 1920  # Vertical for TikTok/Reels
-    VIDEO_FPS: int = 30
-    TTS_LANGUAGE: str = "en"
-    
-    # Rate Limiting
-    REQUESTS_PER_MINUTE: int = Field(default=60, env="REQUESTS_PER_MINUTE")
-    PREMIUM_REQUESTS_PER_MINUTE: int = Field(default=300, env="PREMIUM_REQUESTS_PER_MINUTE")
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    def _get_float_env(self, key: str, default: float) -> float:
+        """Get float environment variable"""
+        try:
+            return float(os.getenv(key, str(default)))
+        except (ValueError, TypeError):
+            return default
     
     @property
     def requests_per_minute(self) -> int:
@@ -141,8 +156,8 @@ class Settings(BaseSettings):
 # Create global settings instance
 settings = Settings()
 
-# Validation
-def validate_config():
+
+def validate_config() -> List[str]:
     """Validate configuration and warn about missing settings"""
     warnings = []
     

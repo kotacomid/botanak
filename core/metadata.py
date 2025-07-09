@@ -8,74 +8,75 @@ import csv
 import re
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, asdict
 from pathlib import Path
-from slugify import slugify
+
+# Simple slugify function to avoid external dependency
+def slugify(text: str, max_length: int = 50) -> str:
+    """Simple slugify function"""
+    if not text:
+        return ""
+    # Convert to lowercase and replace spaces/special chars with hyphens
+    text = re.sub(r'[^\w\s-]', '', text.lower())
+    text = re.sub(r'[-\s]+', '-', text)
+    return text.strip('-')[:max_length]
 
 
-@dataclass
 class BookMetadata:
     """Standard book metadata structure"""
     
-    # Basic Information
-    title: str
-    author: str = ""
-    isbn: str = ""
-    year: Optional[int] = None
-    publisher: str = ""
-    language: str = ""
-    pages: Optional[int] = None
-    
-    # File Information
-    file_format: str = ""
-    file_size: str = ""
-    file_hash: str = ""
-    
-    # Source Information
-    source: str = ""  # annas-archive, libgen, etc.
-    source_url: str = ""
-    mirrors: List[str] = None
-    
-    # Additional Metadata
-    description: str = ""
-    genre: List[str] = None
-    tags: List[str] = None
-    cover_url: str = ""
-    
-    # Download Information
-    download_url: str = ""
-    local_file_path: str = ""
-    local_cover_path: str = ""
-    
-    # Enriched Data
-    google_books_data: Dict = None
-    openlibrary_data: Dict = None
-    
-    # Affiliate Links
-    amazon_link: str = ""
-    ebay_link: str = ""
-    google_books_link: str = ""
-    
-    # Timestamps
-    scraped_at: datetime = None
-    updated_at: datetime = None
-    
-    def __post_init__(self):
-        """Initialize default values"""
-        if self.mirrors is None:
-            self.mirrors = []
-        if self.genre is None:
-            self.genre = []
-        if self.tags is None:
-            self.tags = []
-        if self.google_books_data is None:
-            self.google_books_data = {}
-        if self.openlibrary_data is None:
-            self.openlibrary_data = {}
-        if self.scraped_at is None:
-            self.scraped_at = datetime.now()
-        if self.updated_at is None:
-            self.updated_at = datetime.now()
+    def __init__(self, title: str = "", author: str = "", isbn: str = "", 
+                 year: Optional[int] = None, publisher: str = "", language: str = "",
+                 pages: Optional[int] = None, file_format: str = "", file_size: str = "",
+                 file_hash: str = "", source: str = "", source_url: str = "",
+                 mirrors: List[str] = None, description: str = "", genre: List[str] = None,
+                 tags: List[str] = None, cover_url: str = "", download_url: str = "",
+                 local_file_path: str = "", local_cover_path: str = "",
+                 google_books_data: Dict = None, openlibrary_data: Dict = None,
+                 amazon_link: str = "", ebay_link: str = "", google_books_link: str = "",
+                 scraped_at: datetime = None, updated_at: datetime = None):
+        
+                 # Basic Information
+         self.title = title
+         self.author = author
+         self.isbn = isbn
+         self.year = year
+         self.publisher = publisher
+         self.language = language
+         self.pages = pages
+         
+         # File Information
+         self.file_format = file_format
+         self.file_size = file_size
+         self.file_hash = file_hash
+         
+         # Source Information
+         self.source = source
+         self.source_url = source_url
+         self.mirrors = mirrors or []
+         
+         # Additional Metadata
+         self.description = description
+         self.genre = genre or []
+         self.tags = tags or []
+         self.cover_url = cover_url
+         
+         # Download Information
+         self.download_url = download_url
+         self.local_file_path = local_file_path
+         self.local_cover_path = local_cover_path
+         
+         # Enriched Data
+         self.google_books_data = google_books_data or {}
+         self.openlibrary_data = openlibrary_data or {}
+         
+         # Affiliate Links
+         self.amazon_link = amazon_link
+         self.ebay_link = ebay_link
+         self.google_books_link = google_books_link
+         
+         # Timestamps
+         self.scraped_at = scraped_at or datetime.now()
+         self.updated_at = updated_at or datetime.now()
     
     @property
     def clean_title(self) -> str:
@@ -87,7 +88,7 @@ class BookMetadata:
         """Get cleaned author for filename"""
         return slugify(self.author, max_length=30)
     
-    @property
+        @property
     def filename_base(self) -> str:
         """Get base filename for files"""
         author_part = f"-{self.clean_author}" if self.clean_author else ""
@@ -95,12 +96,35 @@ class BookMetadata:
     
     def to_dict(self) -> Dict:
         """Convert to dictionary for JSON serialization"""
-        data = asdict(self)
-        # Convert datetime objects to ISO format
-        if data['scraped_at']:
-            data['scraped_at'] = data['scraped_at'].isoformat()
-        if data['updated_at']:
-            data['updated_at'] = data['updated_at'].isoformat()
+        data = {
+            'title': self.title,
+            'author': self.author,
+            'isbn': self.isbn,
+            'year': self.year,
+            'publisher': self.publisher,
+            'language': self.language,
+            'pages': self.pages,
+            'file_format': self.file_format,
+            'file_size': self.file_size,
+            'file_hash': self.file_hash,
+            'source': self.source,
+            'source_url': self.source_url,
+            'mirrors': self.mirrors,
+            'description': self.description,
+            'genre': self.genre,
+            'tags': self.tags,
+            'cover_url': self.cover_url,
+            'download_url': self.download_url,
+            'local_file_path': self.local_file_path,
+            'local_cover_path': self.local_cover_path,
+            'google_books_data': self.google_books_data,
+            'openlibrary_data': self.openlibrary_data,
+            'amazon_link': self.amazon_link,
+            'ebay_link': self.ebay_link,
+            'google_books_link': self.google_books_link,
+            'scraped_at': self.scraped_at.isoformat() if self.scraped_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+        }
         return data
     
     @classmethod
