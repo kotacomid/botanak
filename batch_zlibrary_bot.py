@@ -102,13 +102,13 @@ class BatchZBot:
     
     def save_batch_results(self, all_results: Dict, batch_name: str = "batch"):
         """Save batch results in multiple formats"""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         base_filename = f"{batch_name}_{timestamp}"
         
         # Save JSON
         json_file = self.results_dir / "json" / f"{base_filename}.json"
         with open(json_file, 'w', encoding='utf-8') as f:
-            json.dump(all_results, f, indent=2, ensure_ascii=False)
+            json.dump(all_results, f, indent=2)
         print(f"💾 JSON saved: {json_file}")
         
         # Save CSV summary
