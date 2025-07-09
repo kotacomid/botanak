@@ -11,9 +11,13 @@ from typing import List, Dict, Optional
 try:
     import zlibrary
     from zlibrary import Language, Extension
+    ZLIBRARY_AVAILABLE = True
 except ImportError:
     print("❌ zlibrary package not installed. Run: pip install zlibrary")
-    exit(1)
+    ZLIBRARY_AVAILABLE = False
+    zlibrary = None
+    Language = None
+    Extension = None
 
 
 class SimpleZLibrary:
